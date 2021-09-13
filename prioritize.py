@@ -2,9 +2,9 @@
 # This Python program ranks a list by asking the user to choose
 # one out of a pair at a time from the command line
 import os, sys
-import pandas as pd
 
 #located in this directory
+import license_cli
 import file_ops
 import combine
 import comparing
@@ -43,6 +43,9 @@ def increm(val):
 
 
 def main():
+    #display abbreviated License, with options to see Terms and Conditions section
+    license_cli.main()
+
     #use existing data or enter input
     useprior = input("Are you using data from an existing CSV file? Y/N\n")
     datadict = {}
@@ -106,7 +109,7 @@ def main():
         print(str(datadict)) #show message box with entire dictionary
         #write datadict keys to csv file
         file_ops.savelist(datadict.keys(),"Please provide a file name for the list of items. It will be saved with a .csv extension in data-lists.")
-        file_ops.savepdcsv(datadict,"Please provide a file name for sorted dictionary entries of the comparison results. It will be saved with a .csv extension in results.\n")
+        file_ops.savepdcsv(datadict,"Please provide a file name for sorted dictionary entries of the comparison results. It will be saved with a .csv extension in results.")
 
 # Main function calling
 if __name__=="__main__":     
