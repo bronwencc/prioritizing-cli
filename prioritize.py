@@ -1,8 +1,10 @@
+# Code copyright 2021 by Github user bronwencc
 # This Python program ranks a list by asking the user to choose
 # one out of a pair at a time from the command line
-import csv
-import numpy as np
 import os, sys
+import pandas as pd
+
+#located in this directory
 import file_ops
 import combine
 import comparing
@@ -92,7 +94,7 @@ def main():
                 #get information from datadict
                 total_c,above_c,below_c = datadict[chosen_option]
                 total_o,above_o,below_o = datadict[other_option]
-                print(f"chosen {chosen_option}: {above_c}{below_c} \nother {other_option}: {above_o}{below_o}")
+                print(f"chosen {chosen_option}: {above_c}{below_c}\nother {other_option}: {above_o}{below_o}")
                 
                 #update datadict appropriately
                 below_c.append(other_option) #other_option ranks below chosen_option
@@ -104,11 +106,8 @@ def main():
         print(str(datadict)) #show message box with entire dictionary
         #write datadict keys to csv file
         file_ops.savelist(datadict.keys(),"Please provide a file name for the list of items. It will be saved with a .csv extension in data-lists.")
-        
-        #put keys in list in order based on totals (highest value first)
-        sortedlist = sorted(datadict.items(), key = lambda keyval: keyval[1][0], reverse=True)
-        file_ops.savecsv(sortedlist,"Please provide a file name for sorted dictionary entries of the comparison results. It will be saved with a .csv extension in results.")#write sortedlist to text file
-       
+        file_ops.savepdcsv(datadict,"Please provide a file name for sorted dictionary entries of the comparison results. It will be saved with a .csv extension in results.\n")
+
 # Main function calling
 if __name__=="__main__":     
     main()
